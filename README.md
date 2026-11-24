@@ -7,9 +7,9 @@ Parte 2 del trabajo final: una API en Flask y una base de datos PostgreSQL que c
 | | |
 |---|---|
 | API | `https://api-gNN.<dominio-del-curso>` *(pendiente de subdominio)* |
-| Frontend | `https://gNN.<dominio-del-curso>` · repositorio: *(enlace al repo del frontend)* |
+| Frontend | `https://gNN.<dominio-del-curso>` · repositorio: https://github.com/JuanDiegoHO/ProyectoSO_Frontend |
 | Imagen en Docker Hub | [`yexg/so-backend:1.0`](https://hub.docker.com/r/yexg/so-backend) |
-| Integrantes | *(nombres)* |
+| Integrantes | Santiago Molina Rios, Juan Diego Hernández Osorio |
 
 ## Arquitectura
 
