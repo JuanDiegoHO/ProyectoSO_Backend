@@ -1,0 +1,4 @@
+# el .env real nunca se sube (solo .env.example)
+.env
+.venv/
+__pycache__/
