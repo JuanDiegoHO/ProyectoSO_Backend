@@ -6,15 +6,15 @@ Parte 2 del trabajo final: una API en Flask y una base de datos PostgreSQL que c
 
 | | |
 |---|---|
-| API | `https://api-gNN.<dominio-del-curso>` *(pendiente de subdominio)* |
-| Frontend | `https://gNN.<dominio-del-curso>` · repositorio: https://github.com/JuanDiegoHO/ProyectoSO_Frontend |
+| API | [`https://api-sanjuan.scaleautomatization.tech`](https://api-sanjuan.scaleautomatization.tech/api/sistemas) |
+| Frontend | [`https://sanjuan.scaleautomatization.tech`](https://sanjuan.scaleautomatization.tech) · repositorio: https://github.com/JuanDiegoHO/ProyectoSO_Frontend |
 | Imagen en Docker Hub | [`yexg/so-backend:1.0`](https://hub.docker.com/r/yexg/so-backend) |
 | Integrantes | Santiago Molina Rios, Juan Diego Hernández Osorio |
 
 ## Arquitectura
 
 ```
-Navegador ──► https://api-gNN.<dominio>  (VM Ubuntu en Azure)
+Navegador ──► https://api-sanjuan.scaleautomatization.tech  (VM Ubuntu en Azure)
                  │
                  ▼
               Nginx :443  (certificado de Let's Encrypt)
@@ -106,7 +106,7 @@ POSTGRES_USER=so
 POSTGRES_PASSWORD=<clave>
 POSTGRES_DB=so
 DATABASE_URL=postgresql://so:<clave>@db:5432/so
-ORIGEN_PERMITIDO=https://gNN.<dominio-del-curso>
+ORIGEN_PERMITIDO=https://sanjuan.scaleautomatization.tech
 ```
 
 El `.env` real no se sube a GitHub (está en `.gitignore`).
@@ -129,29 +129,28 @@ curl http://localhost:8000/api/sistemas
 ```bash
 sudo apt update && sudo apt install -y nginx certbot python3-certbot-nginx
 sudo cp nginx/azure-api.conf /etc/nginx/sites-available/api
-sudo nano /etc/nginx/sites-available/api      # server_name = api-gNN.<dominio>
 sudo ln -s /etc/nginx/sites-available/api /etc/nginx/sites-enabled/api
 sudo rm /etc/nginx/sites-enabled/default
 sudo nginx -t && sudo systemctl reload nginx
 ```
 
-Cuando `nslookup api-gNN.<dominio>` devuelve la IP de la VM:
+Cuando `nslookup api-sanjuan.scaleautomatization.tech` devuelve la IP de la VM:
 
 ```bash
-sudo certbot --nginx -d api-gNN.<dominio>
-curl https://api-gNN.<dominio>/api/sistemas
+sudo certbot --nginx -d api-sanjuan.scaleautomatization.tech
+curl https://api-sanjuan.scaleautomatization.tech/api/sistemas
 ```
 
 ## 5. Integración con el frontend
 
-1. En el frontend (EC2), `config.js` apunta a `https://api-gNN.<dominio>`.
-2. En la VM, `ORIGEN_PERMITIDO` en `.env` es exactamente la URL del frontend (`https://gNN.<dominio>`, sin `/` al final), y se recrea el backend:
+1. En el frontend (EC2), `config.js` apunta a `https://api-sanjuan.scaleautomatization.tech`.
+2. En la VM, `ORIGEN_PERMITIDO` en `.env` es exactamente la URL del frontend (`https://sanjuan.scaleautomatization.tech`, sin `/` al final), y se recrea el backend:
 
    ```bash
    docker compose up -d
    ```
 
-3. `https://gNN.<dominio>` muestra la tabla llena. En el navegador (F12 → Network) se ve que es el **navegador del usuario** quien hace la petición a la API, no el servidor de EC2.
+3. `https://sanjuan.scaleautomatization.tech` muestra la tabla llena. En el navegador (F12 → Network) se ve que es el **navegador del usuario** quien hace la petición a la API, no el servidor de EC2.
 
 ## Publicar una nueva versión
 
